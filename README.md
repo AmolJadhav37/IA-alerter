@@ -16,23 +16,38 @@ Automatically extracts tables and columns from queries
 Uses HypoPG to create hypothetical indexes (zero storage)
 
 Computes:
+
 Baseline cost
+
 Optimized cost
+
 Improvement %
+
 Hot columns
+
 Hypothetical index sizes
+
 Alerter performs:
+
 Benefit vs tuning-cost analysis
+
 Space-budget validation
+
 Final YES/NO decision
+
 Outputs recommended CREATE INDEX statements
 
- Requirements
+📦 Requirements
 
 Python 3.8+
+
 PostgreSQL with HypoPG extension
+
 Python package:
+
 pip install psycopg2
+
+
 Enable HypoPG:
 
 CREATE EXTENSION IF NOT EXISTS hypopg;
@@ -46,13 +61,18 @@ IA-alerter/
 ├── workload_X_alert.json     # Alerter decision for workload X
 └── README.md
 
- Running the Workload Runner
+▶️ Running the Workload Runner
 
 This executes 4 phases of a workload and collects:
+
 Baseline cost (no indexes)
+
 Optimized cost (all hypothetical index combos)
+
 Hot columns
+
 Index usage
+
 Index sizes
 
 Command
@@ -61,15 +81,20 @@ python3 workload_runner.py <workload_id> <duration_per_phase_sec>
 Example
 python3 workload_runner.py 4 30
 
+
 This runs Workload 4 for:
+
 4 phases
 
 30 seconds per phase
+
 Total = 120 seconds
-Ouput file generated:
+
+Output file generated:
+
 workload_4_stats.json
 
- Running the Alerter
+⚡ Running the Alerter
 
 Once stats are collected, run:
 
@@ -82,6 +107,9 @@ python3 alerter.py 4 20 300
 Where:
 
 20 → minimum required improvement (%)
+
 300 → max total index space allowed (MB)
+
 Output file generated:
+
 workload_4_alert.json
